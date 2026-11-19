@@ -1,0 +1,443 @@
+================================================================================================
+REPORTE DE CONSULTAS ANALÍTICAS COMPLEJAS Y EXPLAIN('executionStats') - MONGODB ATLAS
+Base de Datos : ecommerce_bigdata_analytics
+Fecha (UTC)   : 2026-11-19T03:11:05.781754+00:00
+Rol Responsable: DBA NoSQL
+================================================================================================
+
+------------------------------------------------------------------------------------------------
+[1] CONSULTA 1: Top 10 Combinaciones Región-Categoría por Ingresos Totales
+Colección          : sales_analytics_summary
+Descripción        : Filtro compuesto en sales_analytics_summary por regiones principales, periodo 2025 y revenue >= $50,000; agrupación por región y categoría con ticket ponderado.
+Latencia Cliente   : 101.73 ms
+Server Exec Time   : 5 ms
+Docs Retornados    : 24
+Keys Examinadas    : 1441
+Docs Examinados    : 1440
+Usa Índice (IXSCAN): SÍ
+Plan Ganador       : GROUP <- FETCH <- IXSCAN(idx_summary_region_period_rev)
+------------------------------------------------------------------------------------------------
+Resultados (JSON formateado):
+[
+  {
+    "total_units": 812920,
+    "total_transactions": 180535,
+    "region": "North_America",
+    "category": "Electronics",
+    "total_revenue_usd": 578083540.02,
+    "weighted_avg_ticket_usd": 3202.06,
+    "peak_ticket_usd": 11625.42,
+    "avg_discount_pct": 0.0746
+  },
+  {
+    "total_units": 811406,
+    "total_transactions": 180250,
+    "region": "North_America",
+    "category": "Gaming",
+    "total_revenue_usd": 470697337.82,
+    "weighted_avg_ticket_usd": 2611.36,
+    "peak_ticket_usd": 9626.45,
+    "avg_discount_pct": 0.0749
+  },
+  {
+    "total_units": 571697,
+    "total_transactions": 127143,
+    "region": "Europe",
+    "category": "Electronics",
+    "total_revenue_usd": 406358164.13,
+    "weighted_avg_ticket_usd": 3196.07,
+    "peak_ticket_usd": 11614.7,
+    "avg_discount_pct": 0.0752
+  },
+  {
+    "total_units": 810446,
+    "total_transactions": 180067,
+    "region": "North_America",
+    "category": "Home_Appliances",
+    "total_revenue_usd": 394765881.05,
+    "weighted_avg_ticket_usd": 2192.33,
+    "peak_ticket_usd": 7868.24,
+    "avg_discount_pct": 0.0749
+  },
+  {
+    "total_units": 525815,
+    "total_transactions": 116899,
+    "region": "Latin_America",
+    "category": "Electronics",
+    "total_revenue_usd": 373661599.44,
+    "weighted_avg_ticket_usd": 3196.45,
+    "peak_ticket_usd": 11621.93,
+    "avg_discount_pct": 0.075
+  },
+  {
+    "total_units": 571607,
+    "total_transactions": 127003,
+    "region": "Europe",
+    "category": "Gaming",
+    "total_revenue_usd": 331510565.82,
+    "weighted_avg_ticket_usd": 2610.26,
+    "peak_ticket_usd": 9623.44,
+    "avg_discount_pct": 0.0752
+  },
+  {
+    "total_units": 526429,
+    "total_transactions": 116754,
+    "region": "Latin_America",
+    "category": "Gaming",
+    "total_revenue_usd": 304761949.06,
+    "weighted_avg_ticket_usd": 2610.29,
+    "peak_ticket_usd": 9633.09,
+    "avg_discount_pct": 0.0752
+  },
+  {
+    "total_units": 809772,
+    "total_transactions": 180101,
+    "region": "North_America",
+    "category": "Automotive",
+    "total_revenue_usd": 291721925.02,
+    "weighted_avg_ticket_usd": 1619.77,
+    "peak_ticket_usd": 5946.12,
+    "avg_discount_pct": 0.075
+  },
+  {
+    "total_units": 574688,
+    "total_transactions": 127918,
+    "region": "Europe",
+    "category": "Home_Appliances",
+    "total_revenue_usd": 280654121.66,
+    "weighted_avg_ticket_usd": 2194.02,
+    "peak_ticket_usd": 7856.81,
+    "avg_discount_pct": 0.075
+  },
+  {
+    "total_units": 528152,
+    "total_transactions": 117249,
+    "region": "Latin_America",
+    "category": "Home_Appliances",
+    "total_revenue_usd": 256906789.93,
+    "weighted_avg_ticket_usd": 2191.12,
+    "peak_ticket_usd": 7863.1,
+    "avg_discount_pct": 0.0749
+  }
+]
+
+------------------------------------------------------------------------------------------------
+[2] CONSULTA 2: Análisis de Transacciones de Alto Valor (Enterprise/Premium >= $500)
+Colección          : transactions_sample
+Descripción        : Filtro compuesto sobre transactions_sample (status COMPLETED, segmentos Enterprise/Premium y ticket >= $500); agrupación por segmento, canal y método de pago.
+Latencia Cliente   : 302.77 ms
+Server Exec Time   : 55 ms
+Docs Retornados    : 40
+Keys Examinadas    : 11152
+Docs Examinados    : 11152
+Usa Índice (IXSCAN): SÍ
+Plan Ganador       : GROUP <- FETCH <- IXSCAN(idx_txn_status_segment_net)
+------------------------------------------------------------------------------------------------
+Resultados (JSON formateado):
+[
+  {
+    "order_count": 1321,
+    "segment": "Premium",
+    "channel": "Mobile_App",
+    "payment_method": "Credit_Card",
+    "high_value_revenue_usd": 3041149.72,
+    "avg_order_value_usd": 2302.16,
+    "max_order_value_usd": 11282.34,
+    "avg_units_per_order": 5.16
+  },
+  {
+    "order_count": 1212,
+    "segment": "Premium",
+    "channel": "Web_Desktop",
+    "payment_method": "Credit_Card",
+    "high_value_revenue_usd": 2702487.53,
+    "avg_order_value_usd": 2229.78,
+    "max_order_value_usd": 10881.26,
+    "avg_units_per_order": 5.13
+  },
+  {
+    "order_count": 744,
+    "segment": "Premium",
+    "channel": "Mobile_App",
+    "payment_method": "Debit_Card",
+    "high_value_revenue_usd": 1694704.73,
+    "avg_order_value_usd": 2277.83,
+    "max_order_value_usd": 11242.2,
+    "avg_units_per_order": 5.08
+  },
+  {
+    "order_count": 735,
+    "segment": "Premium",
+    "channel": "Web_Desktop",
+    "payment_method": "Debit_Card",
+    "high_value_revenue_usd": 1633556.64,
+    "avg_order_value_usd": 2222.53,
+    "max_order_value_usd": 11018.4,
+    "avg_units_per_order": 5.1
+  },
+  {
+    "order_count": 573,
+    "segment": "Enterprise",
+    "channel": "Mobile_App",
+    "payment_method": "Credit_Card",
+    "high_value_revenue_usd": 1274885.79,
+    "avg_order_value_usd": 2224.93,
+    "max_order_value_usd": 10624.43,
+    "avg_units_per_order": 4.98
+  },
+  {
+    "order_count": 547,
+    "segment": "Enterprise",
+    "channel": "Web_Desktop",
+    "payment_method": "Credit_Card",
+    "high_value_revenue_usd": 1245017.78,
+    "avg_order_value_usd": 2276.08,
+    "max_order_value_usd": 10992.77,
+    "avg_units_per_order": 5.0
+  },
+  {
+    "order_count": 501,
+    "segment": "Premium",
+    "channel": "Mobile_App",
+    "payment_method": "PayPal",
+    "high_value_revenue_usd": 1138431.8,
+    "avg_order_value_usd": 2272.32,
+    "max_order_value_usd": 11132.81,
+    "avg_units_per_order": 5.16
+  },
+  {
+    "order_count": 472,
+    "segment": "Premium",
+    "channel": "Web_Desktop",
+    "payment_method": "PayPal",
+    "high_value_revenue_usd": 1040290.52,
+    "avg_order_value_usd": 2204.01,
+    "max_order_value_usd": 9447.27,
+    "avg_units_per_order": 5.11
+  },
+  {
+    "order_count": 451,
+    "segment": "Premium",
+    "channel": "Marketplace",
+    "payment_method": "Credit_Card",
+    "high_value_revenue_usd": 1004967.41,
+    "avg_order_value_usd": 2228.31,
+    "max_order_value_usd": 10393.44,
+    "avg_units_per_order": 5.05
+  },
+  {
+    "order_count": 335,
+    "segment": "Premium",
+    "channel": "Web_Desktop",
+    "payment_method": "Digital_Wallet",
+    "high_value_revenue_usd": 768408.7,
+    "avg_order_value_usd": 2293.76,
+    "max_order_value_usd": 10099.8,
+    "avg_units_per_order": 5.36
+  }
+]
+
+------------------------------------------------------------------------------------------------
+[3] CONSULTA 3: Top 12 SKUs de Tecnología/Hogar en North_America y Europe
+Colección          : transactions_sample
+Descripción        : Filtro compuesto por región, categoría y monto >= $200; agrupación por SKU con filtro post-agregación (order_count >= 3), orden descendente y límite.
+Latencia Cliente   : 162.13 ms
+Server Exec Time   : 59 ms
+Docs Retornados    : 1497
+Keys Examinadas    : 10682
+Docs Examinados    : 10682
+Usa Índice (IXSCAN): SÍ
+Plan Ganador       : GROUP <- FETCH <- IXSCAN(idx_txn_region_cat_net)
+------------------------------------------------------------------------------------------------
+Resultados (JSON formateado):
+[
+  {
+    "units_sold": 94,
+    "order_count": 16,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0443",
+    "net_revenue_usd": 74395.35,
+    "gross_revenue_usd": 80274.69,
+    "avg_discount_pct": 0.0688
+  },
+  {
+    "units_sold": 79,
+    "order_count": 15,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0424",
+    "net_revenue_usd": 58245.1,
+    "gross_revenue_usd": 61744.83,
+    "avg_discount_pct": 0.0633
+  },
+  {
+    "units_sold": 75,
+    "order_count": 14,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0147",
+    "net_revenue_usd": 55202.02,
+    "gross_revenue_usd": 60061.5,
+    "avg_discount_pct": 0.0857
+  },
+  {
+    "units_sold": 50,
+    "order_count": 9,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0163",
+    "net_revenue_usd": 54815.89,
+    "gross_revenue_usd": 56097.45,
+    "avg_discount_pct": 0.0278
+  },
+  {
+    "units_sold": 80,
+    "order_count": 14,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0151",
+    "net_revenue_usd": 54480.81,
+    "gross_revenue_usd": 60015.04,
+    "avg_discount_pct": 0.0857
+  },
+  {
+    "units_sold": 63,
+    "order_count": 11,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0285",
+    "net_revenue_usd": 53424.85,
+    "gross_revenue_usd": 57103.42,
+    "avg_discount_pct": 0.0591
+  },
+  {
+    "units_sold": 63,
+    "order_count": 13,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0326",
+    "net_revenue_usd": 50897.03,
+    "gross_revenue_usd": 53318.54,
+    "avg_discount_pct": 0.0654
+  },
+  {
+    "units_sold": 63,
+    "order_count": 13,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0179",
+    "net_revenue_usd": 50534.66,
+    "gross_revenue_usd": 53027.87,
+    "avg_discount_pct": 0.0769
+  },
+  {
+    "units_sold": 60,
+    "order_count": 11,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0079",
+    "net_revenue_usd": 49905.82,
+    "gross_revenue_usd": 55454.72,
+    "avg_discount_pct": 0.1
+  },
+  {
+    "units_sold": 54,
+    "order_count": 10,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0042",
+    "net_revenue_usd": 48358.22,
+    "gross_revenue_usd": 52138.38,
+    "avg_discount_pct": 0.065
+  },
+  {
+    "units_sold": 64,
+    "order_count": 11,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0346",
+    "net_revenue_usd": 48091.52,
+    "gross_revenue_usd": 52985.36,
+    "avg_discount_pct": 0.0818
+  },
+  {
+    "units_sold": 56,
+    "order_count": 10,
+    "category": "Electronics",
+    "sku": "SKU-ELEC-0455",
+    "net_revenue_usd": 48069.63,
+    "gross_revenue_usd": 51383.92,
+    "avg_discount_pct": 0.08
+  }
+]
+
+------------------------------------------------------------------------------------------------
+[4] Verificación Directa de Índice Compuesto (.find().sort().limit().explain('executionStats'))
+Colección          : transactions_sample
+Descripción        : Top 5 transacciones de Electronics en North_America con monto neto >= $1,000 usando índice compuesto.
+Latencia Cliente   : 129.69 ms
+Server Exec Time   : 0 ms
+Docs Retornados    : 5
+Keys Examinadas    : 5
+Docs Examinados    : 5
+Usa Índice (IXSCAN): SÍ
+Plan Ganador       : LIMIT <- PROJECTION_DEFAULT <- FETCH <- IXSCAN(idx_txn_region_cat_net)
+------------------------------------------------------------------------------------------------
+Resultados (JSON formateado):
+[
+  {
+    "transaction_id": "TXN-0003122983",
+    "customer": {
+      "segment": "Regular",
+      "country": "USA"
+    },
+    "product": {
+      "sku": "SKU-ELEC-0253"
+    },
+    "financials": {
+      "net_amount": 11603.74
+    }
+  },
+  {
+    "transaction_id": "TXN-0000807927",
+    "customer": {
+      "segment": "Regular",
+      "country": "CAN"
+    },
+    "product": {
+      "sku": "SKU-ELEC-0276"
+    },
+    "financials": {
+      "net_amount": 11595.36
+    }
+  },
+  {
+    "transaction_id": "TXN-0000784167",
+    "customer": {
+      "segment": "Regular",
+      "country": "CAN"
+    },
+    "product": {
+      "sku": "SKU-ELEC-0047"
+    },
+    "financials": {
+      "net_amount": 11575.69
+    }
+  },
+  {
+    "transaction_id": "TXN-0003880018",
+    "customer": {
+      "segment": "Premium",
+      "country": "CAN"
+    },
+    "product": {
+      "sku": "SKU-ELEC-0054"
+    },
+    "financials": {
+      "net_amount": 11389.38
+    }
+  },
+  {
+    "transaction_id": "TXN-0003159352",
+    "customer": {
+      "segment": "Regular",
+      "country": "MEX"
+    },
+    "product": {
+      "sku": "SKU-ELEC-0496"
+    },
+    "financials": {
+      "net_amount": 11165.6
+    }
+  }
+]

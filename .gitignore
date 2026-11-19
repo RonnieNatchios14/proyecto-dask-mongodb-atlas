@@ -1,0 +1,28 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Variables de entorno y credenciales sensibles
+.env
+.env.local
+.env.*.local
+
+# Datos masivos generados localmente (Big Data)
+data/
+*.csv
+*.parquet
+
+# Artefactos temporales de Dask y Python
+dask-worker-space/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Sistema operativo / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

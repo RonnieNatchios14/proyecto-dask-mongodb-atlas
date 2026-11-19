@@ -1,0 +1,50 @@
+{
+  "timestamp_utc": "2026-11-19T02:09:46.012513+00:00",
+  "hardware": {
+    "os": "Darwin 27.2.0 (arm64)",
+    "python_version": "3.9.6",
+    "cpu_logical_cores": 8,
+    "ram_total_gb": 8.0
+  },
+  "dataset": {
+    "raw_dir": "/Users/ronnienatchios/Documents/Ing Desarrollo De Software/Ciencia de Datos/data/raw",
+    "format": "csv",
+    "files_count": 20,
+    "total_size_mb": 935.95,
+    "configured_rows": 5000000
+  },
+  "dask_config": {
+    "n_workers": 4,
+    "threads_per_worker": 2,
+    "memory_limit": "1.5GB",
+    "blocksize": "64MB"
+  },
+  "pandas": {
+    "engine": "pandas",
+    "execution_time_seconds": 11.334,
+    "wall_time_with_startup_seconds": 12.319,
+    "peak_ram_mb": 1309.88,
+    "avg_ram_mb": 636.88,
+    "summary_groups": 2400,
+    "total_transactions_aggregated": 4242118,
+    "total_revenue_usd": 6383436206.32
+  },
+  "dask": {
+    "engine": "dask",
+    "execution_time_seconds": 6.578,
+    "wall_time_with_startup_seconds": 8.071,
+    "peak_ram_mb": 1017.03,
+    "avg_ram_mb": 665.21,
+    "summary_groups": 2400,
+    "total_transactions_aggregated": 4242118,
+    "total_revenue_usd": 6383436206.32
+  },
+  "comparison": {
+    "time_improvement_pct": 41.96,
+    "speedup_factor": 1.72,
+    "ram_reduction_pct": 22.36,
+    "ram_saved_mb": 292.85,
+    "numerical_equivalence_verified": true,
+    "revenue_absolute_diff_usd": 0.0
+  }
+}

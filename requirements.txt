@@ -1,0 +1,8 @@
+dask[complete]
+pandas
+pymongo
+dnspython
+python-dotenv
+matplotlib
+psutil
+pyarrow
