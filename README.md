@@ -127,19 +127,3 @@ El orquestador ejecutará en orden:
 # Arquitecto Cloud: regenerar el Reporte Técnico en PDF (incluyendo capturas en docs/screenshots/)
 .venv/bin/python -m src.cloud_architect.export_pdf
 ```
-
----
-
-## Generación del Reporte PDF con Capturas Cloud (AWS/GCP y MongoDB Atlas)
-
-1. Coloca tus capturas reales de infraestructura Cloud y Atlas en `docs/screenshots/` siguiendo la guía [`docs/screenshots/README.txt`](docs/screenshots/README.txt):
-   - `01_cloud_compute_aws_gcp.png` (Instancia AWS EC2 / GCP Compute Engine operando)
-   - `02_cloud_network_security.png` (Security Groups / VPC Firewall TCP 27017 y Atlas Network Access)
-   - `03_mongodb_atlas_cluster.png` (Panel principal / métricas del clúster MongoDB Atlas)
-   - `04_mongodb_atlas_collections_indexes.png` (Colecciones e índices compuestos en Atlas)
-   - `05_terminal_healthcheck_pipeline.png` (Ejecución de `healthcheck.py` y `main.py` en consola)
-2. Ejecuta:
-   ```bash
-   .venv/bin/python -m src.cloud_architect.export_pdf
-   ```
-   Esto genera/actualiza automáticamente `docs/REPORTE_TECNICO.pdf` integrando los datos reales del benchmark, la gráfica comparativa, las consultas de MongoDB Atlas y todas las capturas colocadas en `docs/screenshots/`.
